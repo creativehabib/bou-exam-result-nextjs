@@ -29,7 +29,6 @@ interface FormData {
   
 
 const FormInput = () => {
-     // State for form data
   const [formData, setFormData] = useState<FormData>({
     student_id: '',
   });
@@ -65,13 +64,13 @@ const FormInput = () => {
 
       const data = await response.json(); // Parse the response JSON
       if(data.success == false){
-        toast.error(data.message)
-      }else if(data.success == true ){
-        toast.success(data.message)
+        toast.error(data?.message)
+      }else if(data?.success == true ){
+        toast.success(data?.message)
       }
       
       if (response.ok) {
-        setResult(data.data);
+        setResult(data?.data);
         setFormData({ student_id: '' });
         
       } else {
@@ -114,18 +113,18 @@ const FormInput = () => {
                 className="w-full py-2 px-4 border border-gray-300 dark:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent rounded-md"
                 id="student_id"
                 name="student_id"
-                value={formData.student_id}
+                value={formData?.student_id}
                 onChange={handleChange}
+                autoFocus
               />
               <button
                 type="submit"
                 className="absolute right-0 top-0 bottom-0 px-4 bg-gray-700 hover:bg-gray-800 text-white rounded-r-md"
               >
-
                 {loading ? <Loader/> : <Search/>}
               </button>
             </div>
-            {error && <p className="text-red-500">{error.message}</p>}
+            {error && <p className="text-red-500">{error?.message}</p>}
           </form>
 
           {/* Show Data */}
@@ -144,39 +143,39 @@ const FormInput = () => {
                   <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Program:</dt>
-                      <dd>{result.program_name}</dd>
+                      <dd>{result?.program_name}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Study Center:</dt>
-                      <dd>{result.study_center_name}</dd>
+                      <dd>{result?.study_center_name}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Student ID:</dt>
-                      <dd>{result.student_id}</dd>
+                      <dd>{result?.student_id}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Student Name:</dt>
-                      <dd>{result.name_en}</dd>
+                      <dd>{result?.name_en}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Fathers Name:</dt>
-                      <dd>{result.fathers_name_en}</dd>
+                      <dd>{result?.fathers_name_en}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Mothers Name:</dt>
-                      <dd>{result.mothers_name_en}</dd>
+                      <dd>{result?.mothers_name_en}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Batch:</dt>
-                      <dd>{result.academic_year}</dd>
+                      <dd>{result?.academic_year}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Passing Year:</dt>
-                      <dd>{result.passing_year}</dd>
+                      <dd>{result?.passing_year}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">GPA:</dt>
-                      <dd>{result.result}</dd>
+                      <dd>{result?.result}</dd>
                     </div>
                   </dl>
                 </div>
