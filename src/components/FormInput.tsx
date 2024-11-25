@@ -122,7 +122,7 @@ const FormInput = () => {
                 className="absolute right-0 top-0 bottom-0 px-4 bg-gray-700 hover:bg-gray-800 text-white rounded-r-md"
                 disabled={loading}
               >
-                {loading ? <Loader className="animate-spin h-5 w-5 mr-2" /> : <Search/>}
+                {loading ? <Loader className="animate-spin h-5 w-5" /> : <Search/>}
               </button>
             </div>
             {error && <p className="text-red-500">{error?.message}</p>}
