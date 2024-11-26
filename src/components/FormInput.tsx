@@ -99,6 +99,11 @@ const FormInput = () => {
       }
     }
   };
+
+  const validateInput = (event:ChangeEvent<HTMLInputElement>) => {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, ''); // Replace any non-numeric character
+  }
   return (
     <div>
         <div className="mb-8 text-center">
@@ -115,6 +120,7 @@ const FormInput = () => {
                 name="student_id"
                 value={formData?.student_id}
                 onChange={handleChange}
+                onInput={validateInput}
                 autoFocus
               />
               <button
