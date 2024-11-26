@@ -121,6 +121,7 @@ const FormInput = () => {
                 value={formData?.student_id}
                 onChange={handleChange}
                 onInput={validateInput}
+                title="Only digits are allowed"
                 autoFocus
               />
               <button
