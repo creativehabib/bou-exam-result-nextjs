@@ -3,6 +3,7 @@ import React from 'react'
 import { toast } from "react-toastify"
 import { useState, ChangeEvent, FormEvent } from 'react';
 import {Download, Loader, Search } from 'lucide-react';
+import {object} from "prop-types";
 
 // Define types for the form data
 interface FormData {
@@ -21,7 +22,19 @@ interface FormData {
     passing_year: string;
     result: string;
     academic_year: number;
+    detail_results:[
+        {
+        course_code: string;
+        course_name: string;
+        exam_time: number;
+        level_no: number;
+        marks: number;
+        semester_name: string;
+        result: string;
+        }
+    ]
   }
+
   
   interface ErrorState{
     message: string
@@ -29,14 +42,20 @@ interface FormData {
   
 
 const FormInput = () => {
-  const [formData, setFormData] = useState<FormData>({
-    student_id: '',
-  });
-
+  const [formData, setFormData] = useState<FormData>({student_id: ''});
   // State to store the API response data
   const [result, setResult] = useState<ResultData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorState | null>(null);
+
+  // Group results by semester
+  const groupedResults = result?.detail_results.reduce((acc, detail) => {
+    if (!acc[detail.semester_name]) {
+      acc[detail.semester_name] = [];
+    }
+    acc[detail.semester_name].push(detail);
+    return acc;
+  }, {});
 
   // Handle form input change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -190,15 +209,47 @@ const FormInput = () => {
               </div>
             </div>
 
-          <div className="bg-white shadow border rounded-lg mt-6">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Note</h3>
-              <p className="text-sm text-gray-600"> (-)- Waiver, AB- Absent, PR- Problem Related to OMR Sheet fill-up, RP- Expelled in the respective course, WH- Withheld, IC- Incomplete, NA- Not Applicable, X- No Grade Received </p>
+
+            {groupedResults &&
+                Object.keys(groupedResults).map((semester, index) => (
+                  <div key={index} className="bg-white shadow border rounded-lg">
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold mb-2 text-gray-800">Semester: {semester}</h3>
+                      <table className="w-full text-sm text-gray-600">
+                        <thead>
+                        <tr className="border-b bg-gray-50">
+                          <th className="px-3 py-2 text-left">Exam Year/Term</th>
+                          <th className="px-3 py-2 text-left">Course Code</th>
+                          <th className="px-3 py-2 text-left">Course Name</th>
+                          <th className="px-3 py-2 text-center">Letter Grade</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {groupedResults[semester].map((course, index) => (
+                            <tr key={index} className="border-b hover:bg-gray-50 transition duration-150 ease-in-out">
+                              <td className="px-3 py-2">{course.exam_time}</td>
+                              <td className="px-3 py-2">{course.course_code}</td>
+                              <td className="px-3 py-2">{course.course_name}</td>
+                              <td className="px-3 py-2 text-center">{course.result}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ))}
+
+            <div className="bg-white shadow border rounded-lg mt-6">
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">Note</h3>
+                <p className="text-sm text-gray-600"> (-)- Waiver, AB- Absent, PR- Problem Related to OMR Sheet fill-up,
+                  RP- Expelled in the respective course, WH- Withheld, IC- Incomplete, NA- Not Applicable, X- No Grade
+                  Received </p>
+              </div>
             </div>
+
           </div>
-          
-        </div>
-        )}
+          )}
     </div>
   )
 }
