@@ -22,18 +22,18 @@ interface FormData {
     passing_year: string;
     result: string;
     academic_year: number;
-    detail_results:[
-        {
-        course_code: string;
-        course_name: string;
-        exam_time: number;
-        level_no: number;
-        marks: number;
-        semester_name: string;
-        result: string;
-        }
-    ]
+    detail_results: CourseDetail[];
   }
+// Define the type for course details
+interface CourseDetail {
+  course_code: string;
+  course_name: string;
+  exam_time: number;
+  level_no: number;
+  marks: number;
+  semester_name: string;
+  result: string;
+}
 
   
   interface ErrorState{
@@ -55,7 +55,7 @@ const FormInput = () => {
     }
     acc[detail.semester_name].push(detail);
     return acc;
-  }, {});
+  }, {} as Record<string, CourseDetail[]>);
 
   // Handle form input change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -209,35 +209,35 @@ const FormInput = () => {
               </div>
             </div>
 
-
+          {/*show courses details*/}
             {groupedResults &&
-                Object.keys(groupedResults).map((semester, index) => (
-                  <div key={index} className="bg-white shadow border rounded-lg">
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold mb-2 text-gray-800">Semester: {semester}</h3>
-                      <table className="w-full text-sm text-gray-600">
-                        <thead>
-                        <tr className="border-b bg-gray-50">
-                          <th className="px-3 py-2 text-left">Exam Year/Term</th>
-                          <th className="px-3 py-2 text-left">Course Code</th>
-                          <th className="px-3 py-2 text-left">Course Name</th>
-                          <th className="px-3 py-2 text-center">Letter Grade</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {groupedResults[semester].map((course, index) => (
-                            <tr key={index} className="border-b hover:bg-gray-50 transition duration-150 ease-in-out">
-                              <td className="px-3 py-2">{course.exam_time}</td>
-                              <td className="px-3 py-2">{course.course_code}</td>
-                              <td className="px-3 py-2">{course.course_name}</td>
-                              <td className="px-3 py-2 text-center">{course.result}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                      </table>
-                    </div>
+              Object.keys(groupedResults).map((semester, index) => (
+                <div key={index} className="bg-white shadow border rounded-lg">
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-2 text-gray-800">Semester: {semester}</h3>
+                    <table className="w-full text-sm text-gray-600">
+                      <thead>
+                      <tr className="border-b bg-gray-50">
+                        <th className="px-3 py-2 text-left">Exam Year/Term</th>
+                        <th className="px-3 py-2 text-left">Course Code</th>
+                        <th className="px-3 py-2 text-left">Course Name</th>
+                        <th className="px-3 py-2 text-center">Letter Grade</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {groupedResults[semester].map((course, index) => (
+                          <tr key={index} className="border-b hover:bg-gray-50 transition duration-150 ease-in-out">
+                            <td className="px-3 py-2">{course.exam_time}</td>
+                            <td className="px-3 py-2">{course.course_code}</td>
+                            <td className="px-3 py-2">{course.course_name}</td>
+                            <td className="px-3 py-2 text-center">{course.result}</td>
+                          </tr>
+                      ))}
+                      </tbody>
+                    </table>
                   </div>
-                ))}
+                </div>
+              ))}
 
             <div className="bg-white shadow border rounded-lg mt-6">
               <div className="p-4">
