@@ -194,15 +194,15 @@ const FormInput = () => {
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Batch:</dt>
-                      <dd>{result?.academic_year}</dd>
+                      <dd>{result?.batch}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">Passing Year:</dt>
-                      <dd>{result?.passing_year}</dd>
+                      <dd>{result?.passing_year ?? "NA"}</dd>
                     </div>
                     <div className="flex justify-between sm:col-span-1">
                       <dt className="font-semibold">GPA:</dt>
-                      <dd>{result?.result}</dd>
+                      <dd>{result?.result ?? "NA"}</dd>
                     </div>
                   </dl>
                 </div>
