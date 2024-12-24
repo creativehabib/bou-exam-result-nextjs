@@ -214,7 +214,7 @@ const FormInput = () => {
               Object.keys(groupedResults).map((semester, index) => (
                 <div key={index} className="bg-white shadow border rounded-lg">
                   <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-800">Semester: {semester}</h3>
+                    <h3 className="text-lg font-semibold mb-2 text-gray-800">{semester}</h3>
                     <table className="w-full text-sm text-gray-600">
                       <thead>
                       <tr className="border-b bg-gray-50">
