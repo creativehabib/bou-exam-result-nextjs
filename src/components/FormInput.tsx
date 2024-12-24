@@ -49,13 +49,13 @@ const FormInput = () => {
   const [error, setError] = useState<ErrorState | null>(null);
 
   // Group results by semester
-  const groupedResults = result?.detail_results.reduce((acc, detail) => {
-    if (!acc[detail.semester_name]) {
-      acc[detail.semester_name] = [];
-    }
-    acc[detail.semester_name].push(detail);
-    return acc;
-  }, {} as Record<string, CourseDetail[]>);
+    const groupedResults = result?.detail_results.reduce((acc, course) => {
+        if (!acc[course.semester_name]) {
+        acc[course.semester_name] = [];
+        }
+        acc[course.semester_name].push(course);
+        return acc;
+    }, {} as Record<string, CourseDetail[]>);
 
   // Handle form input change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -209,7 +209,7 @@ const FormInput = () => {
               </div>
             </div>
 
-          {/*show courses details*/}
+          {/*show courses details by semester wise*/}
             {groupedResults &&
               Object.keys(groupedResults).map((semester, index) => (
                 <div key={index} className="bg-white shadow border rounded-lg">
