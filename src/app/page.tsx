@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header/>
-      <main className="flex-grow container mx-auto py-2">
+      <main className="flex-grow container mx-auto py-2 px-4">
         <Notice/>
         <FormInput/>
       </main>
