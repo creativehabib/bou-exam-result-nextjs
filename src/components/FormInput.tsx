@@ -129,7 +129,7 @@ const FormInput = () => {
           <h2 className="text-3xl font-bold text-gray-800">Search Your Result</h2>
           <p className="text-sm text-gray-600">Enter your Student ID to view your results</p>
         </div>
-        <form className="max-w-md mx-auto mb-8" onSubmit={handleSubmit}>
+        <form className="max-w-md mx-auto mb-8 px-3" onSubmit={handleSubmit}>
             <div className="relative ">
               <input
                 type="text"
