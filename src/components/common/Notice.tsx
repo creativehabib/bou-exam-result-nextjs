@@ -8,12 +8,12 @@ const Notice = () => {
           <div className="" data-v-2fd469dd="">
             <div className="py-1" data-v-2fd469dd="">
               <div className="flex items-center" data-v-2fd469dd="">
-                <Bell size={24} className='text-cyan-500 mr-2 flex-shrink-0'/>
+                {/* <Bell size={24} className='text-cyan-500 mr-2 flex-shrink-0'/> */}
                 <div className="overflow-hidden flex-grow" data-v-2fd469dd="">
                   <div className="animate-marquee-horizontal whitespace-nowrap" data-v-2fd469dd="">
                   <span className="inline-flex items-center mx-4 text-gray-700" data-v-2fd469dd="">
                       <Megaphone className='h-4 w-4 mr-1'/>
-                      HSC 2024 result has been published
+                      বিএজিএড প্রোগ্রামের ২২২ টার্মের বিষয়ভিত্তিক ও চূড়ান্ত ফলাফল প্রকাশিত হয়েছে!
                     </span>
                   </div>
                 </div>
